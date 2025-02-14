@@ -1,0 +1,51 @@
+{% extends 'home/index.html.twig' %}
+
+
+
+{% block title %}Klawiatury{% endblock %}
+
+{% block body %}
+    <h1>Klawiatury</h1>
+    
+    {% if products is empty %}
+        <p>No keyboards available.</p>
+    {% else %}
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            {% for product in products %}
+                <div style="border: 1px solid #ccc; padding: 10px; width: 200px; text-align: center;">
+                    <h3>{{ product.name }}</h3>
+                    <p>Firma: {{ product.brand }}</p>
+                    <p>Cena: {{ product.price }}</p>
+                    <p>Nazwa: {{ product.name }}</p>
+                    <img src="{{ product.imgPath }}" alt="placeholder" width="100">
+                    <br>
+                    <a href="{{ path('klawiatury_detail', {'id': product.id}) }}" style="display: block; margin-top: 10px; text-decoration: none; background: #007bff;
+                     color: white; padding: 5px; border-radius: 5px;">Sprawdź recenzje</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+{% endblock %}
+
+
+{# {% block title %}Klawiatury{% endblock %}
+
+{% block body %}
+    <h1>Klawiatury</h1>
+    
+    {% if products is empty %}
+        <p>No keyboards available.</p>
+    {% else %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    {{ product.name }} - {{ product.brand }} - ${{ product.price }}
+                    <img src="{{ product.imgPath }}" alt="{{ product.name }}" width="50">
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <a href="{{ path('product_add') }}">Add New Product</a>
+{% endblock %} #}

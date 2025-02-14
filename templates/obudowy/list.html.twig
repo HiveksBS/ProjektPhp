@@ -1,0 +1,29 @@
+{% extends 'home/index.html.twig' %}
+
+
+
+{% block title %}Obudowy{% endblock %}
+
+{% block body %}
+    <h1>Obudowy</h1>
+    
+    {% if products is empty %}
+        <p>Nie ma produktów w tej kategori</p>
+    {% else %}
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            {% for product in products %}
+                <div style="border: 1px solid #ccc; padding: 10px; width: 200px; text-align: center;">
+                    <h3>{{ product.name }}</h3>
+                    <p>Firma: {{ product.brand }}</p>
+                    <p>Cena: {{ product.price }}</p>
+                    <p>Nazwa: {{ product.name }}</p>
+                    <img src="{{ product.imgPath }}" alt="placeholder" width="100">
+                    <br>
+                    <a href="{{ path('obudowy_detail', {'id': product.id}) }}" style="display: block; margin-top: 10px; text-decoration: none; background: #007bff;
+                     color: white; padding: 5px; border-radius: 5px;">Sprawdź recenzje</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+{% endblock %}

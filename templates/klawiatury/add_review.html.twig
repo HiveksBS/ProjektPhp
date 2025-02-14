@@ -1,0 +1,12 @@
+{% extends 'home/index.html.twig' %}
+
+{% block body %}
+    <h2>Dodaj recenzje dla {{ product.name }}</h2>
+
+    {{ form_start(reviewForm) }}
+        {{ form_row(reviewForm.rating) }}
+        {{ form_row(reviewForm.review_text) }}
+    {{ form_end(reviewForm) }}
+
+    <a href="{{ path('klawiatury_detail', {'id': product.id}) }}">Cofnij do produktu</a>
+{% endblock %}

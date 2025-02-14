@@ -1,0 +1,10 @@
+{% extends 'home/index.html.twig' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block body %}
+    <h1>Add Product</h1>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

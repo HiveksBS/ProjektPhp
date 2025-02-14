@@ -1,17 +1,69 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .banner h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            margin: 0; 
+        }
+        .option {
+            margin: 0 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .option:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+    <div class="banner">
+        {% block banner %}
+            <h1>KeyboardForYou</h1>
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    </div>
+
+    <div class="options">
+        {% block navigation %}
+            <a href="/klawiatury" class="option">Klawiatury</a>
+            <a href="/switche" class="option">Switche</a>
+            <a href="/keycapy" class="option">Keycapy</a>
+            <a href="/obudowy" class="option">Obudowy</a>
+        {% endblock %}
+    </div>
+    <div class="content">
+        {% block content %}
+            <p>TODO</p>
+        {% endblock %}
+    </div>
+    <main>
+            {% block body %}{% endblock %} {#Jeśli formum twig ma np block body w rozszeanym twigu musi znajdować się ten zam block#}
+        </main>
+</body>
 </html>

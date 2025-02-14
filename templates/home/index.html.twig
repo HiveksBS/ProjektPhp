@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pl">
+<h <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <style>
+    body {
+
+            font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.banner {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.banner h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+.options {
+    display: flex;
+    justify-content: center; /* Center the navigation options */
+    align-items: center; /* Vertically center items */
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    position: relative; /* Allow absolute positioning of user-info */
+}
+
+.option {
+    margin: 0 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #0056b3;
+}
+
+.user-info {
+    position: absolute; /* Position the user info at the right */
+    right: 20px; /* Align to the right edge of the container */
+    top: 50%; /* Vertically center the user info */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between username and logout button */
+}
+
+.user-info .username {
+    font-weight: bold;
+}
+
+.user-info .logout-btn {
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-info .logout-btn:hover {
+    background-color: #d32f2f;
+}
+    </style>
+</head>
+<body>
+    <meta charset="UTF-8">
+   
+
+    <div class="banner">
+        {% block banner %}
+            <h1>KeyboardForYou</h1>
+        {% endblock %}
+    </div>
+
+
+<div class="options">
+    <div class="navigation">
+        <a href="/klawiatury" class="option">Klawiatury</a>
+        <a href="/switche" class="option">Switche</a>
+        <a href="/keycapy" class="option">Keycapy</a>
+        <a href="/obudowy" class="option">Obudowy</a>
+    </div>
+    <div class="user-info">
+        {% if app.user %}
+            {% if is_granted('ROLE_ADMIN') %}
+                   <a href="{{ path('moderation_reviews') }}">Moderacja</a> {#Wyświetli tylko dla admina #}
+                   <a href="{{ path('product_add') }}">Dodaj Produkt</a>
+            {% endif %}
+             <a href="{{ path('user_account') }}" class="option">Konto</a>
+            <span class="username">Hej, {{ app.user.username }}</span>
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="logout-btn">Wyloguj</button>   
+                
+            </form>
+          
+        {% else %}
+            
+            <a href="/login" class="option">Login</a>
+            <a href="/register" class="option">Rejestracja</a>
+        {% endif %}
+    </div>
+</div>
+    <div class="content">
+        {% block content %}
+            
+        {% endblock %}
+    </div>
+    <main>
+            {% block body %}{% endblock %} {#Jeśli formum twig ma np block body w rozszeanym twigu musi znajdować się ten zam block#}
+        </main>
+</body>
+</html>

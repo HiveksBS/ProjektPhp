@@ -1,0 +1,45 @@
+{% extends 'home/index.html.twig' %}
+
+        {% block title %}Switche{% endblock %}
+
+{% block body %}
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <div style="border: 1px solid #ccc; padding: 10px; width: 250px; text-align: center;">
+      {{ product.name }} - {{ product.brand }} - {{ product.price }}
+      {{ product.name }}
+     <img src="{{ product.imgPath }}" alt="pp" width="50">
+
+  </div>
+  <a href="{{ path('obudowy_add_review', {'id': product.id}) }}">Dodaj Recenzje</a>
+</div>
+ <hr style="margin-top: 15px; border: 1px solid #ddd;"> 
+ <h3 style="text-align: center;">Recenzje</h3>
+
+{% if product.reviews|length > 0 %}
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        {% for review in product.reviews %}
+            {% if review.status == 2 %}
+            <div style="border: 1px solid #ddd; padding: 10px; width: 300px; background-color: #f9f9f9; border-radius: 5px;">
+             <p>User {{review.userId.username }}</p>
+             <div class="stars">
+                    {% for i in 1..10 %}
+                        {% if i <= review.rating %}
+                            <span class="star filled">★</span>
+                        {% else %}
+                            <span class="star">☆</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+             <p>Ocena {{review.rating}}</p>
+             <p>Recenzja:</p>
+             <p>{{review.reviewText }}</p>
+            </div>
+            {% endif %}
+            
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="text-align: center;">Brak recenzji dla tego produktu. Dodaj swoją recenzje</p>
+{% endif %}
+
+{% endblock %}
